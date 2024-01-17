@@ -9,6 +9,7 @@ import com.jlyh.room.room.model.Room;
 import com.jlyh.room.room.service.IRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -36,6 +37,12 @@ public class RoomController {
         PropertiesRoom propertiesRoom = new PropertiesRoom(configRoom.getMsg(), configRoom.getBuildVersion(), configRoom.getMailDetails());
         String jsonString = owj.writeValueAsString(propertiesRoom);
         return jsonString;
+    }
+
+    @GetMapping("/rooms/{id}")
+    public List<Room> getAllRoom(@PathVariable Long id){
+
+        return roomService.getRoomByHotelId(id);
     }
 
 }
